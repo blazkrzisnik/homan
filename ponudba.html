@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponudba | Kavarna Homan</title>
+<meta name="description" content="Ponudba Kavarne Homan — kava, hišne torte in slaščice, sveži prigrizki na Mestnem trgu v Škofji Loki.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cinzel:wght@500;600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#6E1420">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">Homan<span>.</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-nav="index">Domov</a></li>
+      <li><a href="ponudba.html" data-nav="ponudba" class="active">Ponudba</a></li>
+      <li><a href="druzina-prevc.html" data-nav="druzina-prevc">Družina Prevc</a></li>
+      <li><a href="rezervacije.html" class="nav-cta-link" data-nav="rezervacije">Rezervacije</a></li>
+      <li class="nav-mobile-info">
+        <span>Mestni trg 2, Škofja Loka</span>
+        <a href="tel:+38645123047">04 512 30 47</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section style="padding-top:64px; padding-bottom: 40px;">
+  <div class="container">
+    <span class="eyebrow">Kava, torte, tradicija</span>
+    <h1>Naša ponudba</h1>
+    <p class="lede">Recepti, ki segajo do Ane Guzelj in Barbare Homan — hišne torte, sveže pecivo in skrbno pripravljena kava.</p>
+
+    <div class="menu-tabs" id="menuTabs">
+      <button class="menu-tab active" data-cat="kava">Kava</button>
+      <button class="menu-tab" data-cat="slascice">Slaščice</button>
+      <button class="menu-tab" data-cat="hrana">Prigrizki</button>
+    </div>
+  </div>
+</section>
+
+<section class="band-dark cat-band" data-menu-cat="kava" style="text-align:center; padding:56px 0;">
+  <div class="container">
+    <span class="eyebrow">Hišna posebnost</span>
+    <h2>Homanova bela kava</h2>
+    <p style="max-width:55ch;margin:0 auto;opacity:0.9;">Lastna mešanica z rahlo karamelno noto — kava, po kateri se Ločani vračajo že leta.</p>
+  </div>
+</section>
+<section class="band-dark cat-band" data-menu-cat="slascice" style="display:none; text-align:center; padding:56px 0;">
+  <div class="container">
+    <span class="eyebrow">Hišna posebnost</span>
+    <h2>Grajska torta</h2>
+    <p style="max-width:55ch;margin:0 auto;opacity:0.9;">Orehov biskvit, kremna polnitev, čokoladna glazura — recept, ki se prenaša skozi generacije slaščičark.</p>
+  </div>
+</section>
+<section class="band-dark cat-band" data-menu-cat="hrana" style="display:none; text-align:center; padding:56px 0;">
+  <div class="container">
+    <span class="eyebrow">Hišna posebnost</span>
+    <h2>Domača frtalja</h2>
+    <p style="max-width:55ch;margin:0 auto;opacity:0.9;">Loška tradicionalna omleta z zelišči, pripravljena po starem receptu.</p>
+  </div>
+</section>
+
+<section style="padding-top:40px;">
+  <div class="container">
+    <div class="menu-list" id="menuList">
+      <p class="menu-state">Nalagam ponudbo …</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <div class="brand" style="color:var(--cream-100);">Homan<span>.</span></div>
+      <p>Kavarna in slaščičarna na Mestnem trgu — družinska zgodba, ki traja že dvesto let.</p>
+      <a href="https://maps.google.com/?q=Mestni+trg+2,+4220+%C5%A0kofja+Loka" target="_blank" rel="noopener" class="map-link">
+        Mestni trg 2, Škofja Loka — odpri v Google Maps
+      </a>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Povezave</h4>
+        <a href="index.html">Domov</a>
+        <a href="ponudba.html">Ponudba</a>
+        <a href="druzina-prevc.html">Družina Prevc</a>
+        <a href="rezervacije.html">Rezervacije</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="tel:+38645123047">04 512 30 47</a>
+        <a href="mailto:kavarna.homan@siol.net">kavarna.homan@siol.net</a>
+      </div>
+      <div>
+        <h4>Odpiralni čas</h4>
+        <p>Pon–čet: 8.00–22.00<br>Pet–sob: 8.00–24.00<br>Ned: 8.00–22.00</p>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; <span id="year"></span> Kavarna in slaščičarna Homan</span>
+    <span>Mestni trg 2, Škofja Loka</span>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="menu.js"></script>
+</body>
+</html>

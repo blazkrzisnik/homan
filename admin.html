@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Kavarna Homan</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Karla:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: var(--cream-200); }
+  .admin-wrap { max-width: 720px; margin: 60px auto; padding: 0 20px; }
+  .admin-card { background: #fff; border: 1px solid var(--cream-300); border-radius: var(--radius); padding: 30px; margin-bottom: 24px; }
+  .admin-card h2 { font-size: 1.4rem; }
+  .row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row-grid .field { margin-bottom: 12px; }
+  .existing-item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--cream-300); font-size: 0.88rem; }
+  .existing-item .meta { flex: 1; }
+  .existing-item button { border: none; background: none; color: var(--bordo-600); cursor: pointer; font-size: 0.8rem; }
+  #gate { max-width: 360px; margin: 120px auto; text-align: center; }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h2>Admin dostop</h2>
+  <div class="field"><input type="password" id="pw" placeholder="Geslo"></div>
+  <button class="btn btn-primary" onclick="checkPw()">Vstopi</button>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:16px;">Osnovna zaščita za urejanje vsebine — ne nadomešča Supabase RLS pravil na strežniški strani.</p>
+</div>
+
+<div class="admin-wrap" id="panel" style="display:none;">
+  <h1>Urejanje ponudbe — Homan</h1>
+  <p style="color:var(--muted);font-size:0.9rem;margin-top:-10px;">Rezervacije prihajajo neposredno na e-pošto prek obrazca na strani Rezervacije — tukaj urejaš samo ponudbo.</p>
+
+  <div class="admin-card">
+    <h2>Dodaj postavko ponudbe</h2>
+    <div class="row-grid">
+      <div class="field"><label>Kategorija</label>
+        <select id="m-cat"><option value="kava">Kava & napitki</option><option value="slascice">Torte & slaščice</option><option value="hrana">Slano & prigrizki</option></select>
+      </div>
+      <div class="field"><label>Cena</label><input id="m-price" placeholder="npr. 3,50 €"></div>
+    </div>
+    <div class="field"><label>Ime</label><input id="m-name"></div>
+    <div class="field"><label>Opis</label><input id="m-desc"></div>
+    <button class="btn btn-primary" onclick="addMenuItem()">Dodaj v ponudbo</button>
+    <div id="menuItemsList" style="margin-top:20px;"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const ADMIN_PASSWORD = 'homan2026'; // TODO: zamenjaj pred objavo
+
+function checkPw() {
+  const val = document.getElementById('pw').value;
+  if (val === ADMIN_PASSWORD) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    loadMenuAdmin();
+  } else {
+    alert('Napačno geslo.');
+  }
+}
+
+async function addMenuItem() {
+  if (!supabaseClient) return alert('Supabase ni povezan — dopolni js/supabase-config.js.');
+  const item = {
+    category: document.getElementById('m-cat').value,
+    name: document.getElementById('m-name').value,
+    description: document.getElementById('m-desc').value,
+    price: document.getElementById('m-price').value,
+  };
+  if (!item.name) return alert('Vnesi ime postavke.');
+  const { error } = await supabaseClient.from('menu_items').insert(item);
+  if (error) return alert('Napaka: ' + error.message);
+  ['m-name','m-desc','m-price'].forEach(id => document.getElementById(id).value = '');
+  loadMenuAdmin();
+}
+
+async function loadMenuAdmin() {
+  const el = document.getElementById('menuItemsList');
+  if (!supabaseClient) { el.innerHTML = '<p>Supabase ni povezan — prikazani so privzeti podatki na strani.</p>'; return; }
+  const { data, error } = await supabaseClient.from('menu_items').select('*').order('category');
+  if (error) { el.innerHTML = `<p>Napaka: ${error.message}</p>`; return; }
+  el.innerHTML = (data || []).map(i => `
+    <div class="existing-item">
+      <span class="meta">[${i.category}] <strong>${i.name}</strong> — ${i.price || ''}</span>
+      <button onclick="deleteRow(${i.id})">Izbriši</button>
+    </div>`).join('') || '<p style="color:var(--muted);">Ni vnosov v bazi — na strani se prikazujejo privzeti podatki.</p>';
+}
+
+async function deleteRow(id) {
+  if (!confirm('Izbrišem vnos?')) return;
+  const { error } = await supabaseClient.from('menu_items').delete().eq('id', id);
+  if (error) return alert('Napaka: ' + error.message);
+  loadMenuAdmin();
+}
+</script>
+</body>
+</html>

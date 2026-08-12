@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rezervacije | Kavarna Homan</title>
+<meta name="description" content="Rezerviraj mizo v Kavarni Homan na Mestnem trgu v Škofji Loki.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cinzel:wght@500;600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#6E1420">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">Homan<span>.</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-nav="index">Domov</a></li>
+      <li><a href="ponudba.html" data-nav="ponudba">Ponudba</a></li>
+      <li><a href="druzina-prevc.html" data-nav="druzina-prevc">Družina Prevc</a></li>
+      <li><a href="rezervacije.html" class="active nav-cta-link" data-nav="rezervacije">Rezervacije</a></li>
+      <li class="nav-mobile-info">
+        <span>Mestni trg 2, Škofja Loka</span>
+        <a href="tel:+38645123047">04 512 30 47</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section style="padding-top:64px;">
+  <div class="container contact-grid">
+    <div>
+      <span class="eyebrow">Kontakt</span>
+      <h1>Pridite na kavo — ali rezervirajte mizo</h1>
+      <div style="height:16px;"></div>
+
+      <div class="info-line"><span class="label">Naslov</span><span><strong>Mestni trg 2, 4220 Škofja Loka</strong></span></div>
+      <div class="info-line"><span class="label">Delovni čas</span><span><strong>Pon–čet 8–22, pet–sob 8–24, ned 8–22</strong></span></div>
+      <div class="info-line"><span class="label">Telefon</span><span><strong>04 512 30 47</strong></span></div>
+      <div class="info-line"><span class="label">E-pošta</span><span><strong>kavarna.homan@siol.net</strong></span></div>
+
+      <div class="social-row">
+        <a href="#" class="social-circle" aria-label="Instagram">IG</a>
+        <a href="#" class="social-circle" aria-label="Facebook">FB</a>
+      </div>
+
+      <a href="https://maps.google.com/?q=Mestni+trg+2,+4220+%C5%A0kofja+Loka" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:28px;">Odpri lokacijo v Google Maps</a>
+    </div>
+
+    <div class="form-card">
+      <h2>Rezervirajte mizo</h2>
+      <div class="field"><label for="r-name">Ime in priimek</label><input type="text" id="r-name" placeholder="Vaše ime" required></div>
+      <div class="field"><label for="r-email">E-naslov</label><input type="email" id="r-email" placeholder="ime@primer.si" required></div>
+      <div class="field">
+        <label for="r-purpose">Namen rezervacije</label>
+        <select id="r-purpose">
+          <option>Miza v kavarni</option>
+          <option>Terasa pod lipo</option>
+          <option>Skupina / dogodek</option>
+          <option>Drugo</option>
+        </select>
+      </div>
+      <div class="field"><label for="r-note">Sporočilo</label><textarea id="r-note" rows="5" placeholder="Datum, ura, število oseb …"></textarea></div>
+      <button class="btn btn-primary" id="submitBooking" style="width:100%;justify-content:center;">Pošlji rezervacijo</button>
+      <div class="booking-status" id="bookingStatus"></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <div class="brand" style="color:var(--cream-100);">Homan<span>.</span></div>
+      <p>Kavarna in slaščičarna na Mestnem trgu — družinska zgodba, ki traja že dvesto let.</p>
+      <a href="https://maps.google.com/?q=Mestni+trg+2,+4220+%C5%A0kofja+Loka" target="_blank" rel="noopener" class="map-link">
+        Mestni trg 2, Škofja Loka — odpri v Google Maps
+      </a>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Povezave</h4>
+        <a href="index.html">Domov</a>
+        <a href="ponudba.html">Ponudba</a>
+        <a href="druzina-prevc.html">Družina Prevc</a>
+        <a href="rezervacije.html">Rezervacije</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="tel:+38645123047">04 512 30 47</a>
+        <a href="mailto:kavarna.homan@siol.net">kavarna.homan@siol.net</a>
+      </div>
+      <div>
+        <h4>Odpiralni čas</h4>
+        <p>Pon–čet: 8.00–22.00<br>Pet–sob: 8.00–24.00<br>Ned: 8.00–22.00</p>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; <span id="year"></span> Kavarna in slaščičarna Homan</span>
+    <span>Mestni trg 2, Škofja Loka</span>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<script src="main.js"></script>
+<script src="reservations.js"></script>
+</body>
+</html>
